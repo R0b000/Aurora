@@ -3,7 +3,7 @@ const app = require('./src/config/express.config');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8001;
-const URL = `127.0.0.1` || process.env.URL
+const URL =  process.env.HOST_URL || `127.0.0.1`;
 
 const httpServer = http.createServer(app);
 
