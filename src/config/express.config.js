@@ -8,8 +8,12 @@ require('./mongoose.config');
 const app = express();
 
 app.use(cors({
-    origin: [process.env.HOST_URL, 'http://localhost:4173']
-}))
+    origin: [
+        process.env.CLIENT_URL,
+        "http://localhost:5173"
+    ],
+    credentials: true
+}));
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 60 * 1000,

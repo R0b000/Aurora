@@ -18,10 +18,6 @@ if (process.env.NODE_ENV === 'production') {
     console.log('🧑‍💻 Running in development mode');
 }
 
-httpServer.listen(PORT, URL, (error) => {
-    if (!error) {
-        console.log(`http://${URL}:${PORT}`)
-    } else {
-        console.log('Error hosting the backend.')
-    }
-})
+httpServer.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
