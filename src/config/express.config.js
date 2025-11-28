@@ -38,6 +38,13 @@ app.use(express.json({
 
 app.use('/api/', route);
 
+app.get('/ping', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Backend is running"
+    });
+});
+
 //Routing handling for the invalid urls 
 app.use((req, res, next) => {
     res.status(404).json({
