@@ -1,20 +1,26 @@
 const express = require('express');
-const route = require('./router.config');
 const cors = require('cors')
+const route = require('./router.config');
 const helmet = require('helmet')
-const {rateLimit} = require('express-rate-limit')
+const { rateLimit } = require('express-rate-limit')
 require('./mongoose.config');
 
 const app = express();
 
+const allowedOrigins = [
+    "https://aurorashop.free.nf",
+    "http://localhost:5173",
+    "http://localhost:4173"
+];
+
 app.use(cors({
-    origin: '*',
+    origin: allowedOrigins,
     credentials: true
 }));
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 60 * 1000,
-	limit: 10000,
+    max: 10000,
 })
 
 app.use(limiter)
@@ -34,13 +40,13 @@ app.use('/api/', route);
 
 //Routing handling for the invalid urls 
 app.use((req, res, next) => {
-    res.json({
+    res.status(404).json({
         data: '',
-        code: 404, 
+        code: 404,
         status: "Invalid Url",
         message: "Entered Url is invalid one check it again",
         options: null
-    })
+    });
 });
 
 //Global Middleware
@@ -52,9 +58,9 @@ app.use((error, req, res, next) => {
     let options = error.options || null;
 
     res.status(code).json({
-        data: data, 
+        data: data,
         status: status,
-        message: message, 
+        message: message,
         options: options
     })
 })

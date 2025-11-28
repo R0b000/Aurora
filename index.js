@@ -1,22 +1,20 @@
+require('dotenv').config();
 const http = require('http');
 const app = require('./src/config/express.config');
-require('dotenv').config();
 
-const PORT = process.env.PORT || 8001;
-const URL = process.env.HOST_URL || `127.0.0.1`;
-
-const httpServer = http.createServer(app);
-
+// Move this BEFORE creating http server
 if (process.env.NODE_ENV === 'production') {
     console.log('🚀 Running in production mode');
-    app.set('trust proxy', 1); // important when behind proxy (Render, Vercel, etc.)
+    app.set('trust proxy', 1);
 
-    // Optional: enable compression for faster responses
     const compression = require('compression');
     app.use(compression());
 } else {
     console.log('🧑‍💻 Running in development mode');
 }
+
+const PORT = process.env.PORT || 8001;
+const httpServer = http.createServer(app);
 
 httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
