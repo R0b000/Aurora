@@ -83,8 +83,8 @@ class OrderItemsController {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        return_url: `http://localhost:5173/customer/cart/khalti-success`,
-                        website_url: `http://localhost:5173`,
+                        return_url: `https://aurorashop.free.nf/customer/cart/khalti-success`,
+                        website_url: `https://aurorashop.free.nf`,
                         amount: 1000,
                         purchase_order_id: data._id,
                         purchase_order_name: data.user.name,
