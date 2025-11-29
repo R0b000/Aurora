@@ -9,6 +9,7 @@ const app = express();
 
 const allowedOrigins = [
     "https://aurorashop.free.nf",
+    "www.aurorashop.free.nf",
     "http://localhost:5173",
     "http://localhost:4173"
 ];
